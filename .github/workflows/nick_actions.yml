@@ -39,4 +39,4 @@ jobs:
           WEATHER_API: ${{ secrets.WEATHERAPI}}
           NICK_API: ${{ secrets.NICKAPI }}
         run: |
-          python get_activity.py
+          python /home/runner/work/nick_activity_analyzerget_activity.py
