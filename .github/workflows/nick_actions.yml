@@ -23,11 +23,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: build apk package
+      - name: Checkout my private repo
         env:
           SECRET_TOKEN: ${{ secrets.CREDENTIALS_TOKEN }}
           SECRET_REPO: ${{ secrets.SECRET_REPO }}
-        uses: actions/checkout@v2
+        uses: actions/checkout@main
         with:
           repository: raynbowy23/${{ secrets.SECRET_REPO }}
           token: ${{ secrets.CREDENTIALS_TOKEN}}
