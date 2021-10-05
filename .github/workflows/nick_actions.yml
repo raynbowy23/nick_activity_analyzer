@@ -1,0 +1,42 @@
+name: nick_actions
+
+on:
+  schedule:
+    - cron: '0,30 * * * *'
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: build apk package
+        env:
+          SECRET_TOKEN: ${{ secrets.CREDENTIALS_TOKEN }}
+          SECRET_REPO: ${{ secrets.SECRET_REPO }}
+        run: |
+          cd ..
+          git clone https://${{ secrets.SECRET_TOKEN }}@github.com/raynbowy23/${{ secrets.SECRET_REPO }}.git
+          cp ./${{ secrets.SECRET_REPO }}/confidentials.json ./confidentials.json
+
+      - name: Get nick's activity
+        env:
+          EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          WEATHER_API: ${{ secrets.WEATHERAPI}}
+          NICK_API: ${{ secrets.NICKAPI }}
+        run: |
+          python get_activity.py
