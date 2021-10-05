@@ -28,9 +28,12 @@ jobs:
         env:
           SECRET_TOKEN: ${{ secrets.CREDENTIALS_TOKEN }}
           SECRET_REPO: ${{ secrets.SECRET_REPO }}
+          CLIEND_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
         with:
           repository: raynbowy23/${{ secrets.SECRET_REPO }}
           token: ${{ secrets.CREDENTIALS_TOKEN}}
+          path: ${{ secrets.SECRET_REPO }}
 
       - name: Get nick's activity
         env:
@@ -39,4 +42,4 @@ jobs:
           WEATHER_API: ${{ secrets.WEATHERAPI}}
           NICK_API: ${{ secrets.NICKAPI }}
         run: |
-          python /home/runner/work/nick_activity_analyzer/get_activity.py
+          python get_activity.py
