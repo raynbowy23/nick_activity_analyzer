@@ -27,7 +27,6 @@ jobs:
         env:
           SECRET_TOKEN: ${{ secrets.CREDENTIALS_TOKEN }}
           SECRET_REPO: ${{ secrets.SECRET_REPO }}
-        uses: actions/checkout@main
         with:
           repository: raynbowy23/${{ secrets.SECRET_REPO }}
           token: ${{ secrets.CREDENTIALS_TOKEN}}
