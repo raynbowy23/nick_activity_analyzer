@@ -27,10 +27,10 @@ jobs:
         env:
           SECRET_TOKEN: ${{ secrets.CREDENTIALS_TOKEN }}
           SECRET_REPO: ${{ secrets.SECRET_REPO }}
-        run: |
-          cd ..
-          git clone https://${{ secrets.SECRET_TOKEN }}@github.com/raynbowy23/${{ secrets.SECRET_REPO }}.git
-          cp ./${{ secrets.SECRET_REPO }}/confidentials.json ./confidentials.json
+        uses: actions/checkout@v2
+        with:
+          repository: raynbowy23/${{ secrets.SECRET_REPO }}
+          token: ${{ secrets.CREDENTIALS_TOKEN}}
 
       - name: Get nick's activity
         env:
