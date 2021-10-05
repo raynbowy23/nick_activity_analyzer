@@ -24,6 +24,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Checkout my private repo
+        uses: actions/checkout@v2
         env:
           SECRET_TOKEN: ${{ secrets.CREDENTIALS_TOKEN }}
           SECRET_REPO: ${{ secrets.SECRET_REPO }}
