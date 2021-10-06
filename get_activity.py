@@ -84,7 +84,7 @@ for i in range(len(whole_list)):
     # nick_writer.writerow([current_time, location, totalcapacity, active, temp_max, temp_min, climate])
 
     # csv_file.close()
-  new_row = '\n' + current_time + ',' + location + ',' + totalcapacity + ',' +  active + ',' + temp_max + ',' + temp_min + ',' + climate
+  new_row = '\n' + str(current_time) + ',' + str(location) + ',' + str(totalcapacity) + ',' + str(active) + ',' + str(temp_max) + ',' + str(temp_min) + ',' + str(climate)
   print(new_row)
   f.SetContentString(content + new_row)
   print(f.GetContentString())
