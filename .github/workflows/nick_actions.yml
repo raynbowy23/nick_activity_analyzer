@@ -42,4 +42,4 @@ jobs:
           WEATHER_API: ${{ secrets.WEATHERAPI}}
           NICK_API: ${{ secrets.NICKAPI }}
         run: |
-          python ${{ secrets.SECRET_REPO }}/get_activity.py
+          python get_activity.py
