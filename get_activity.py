@@ -61,33 +61,35 @@ for i in range(len(nick_list)-2): # len(nick_list) = 31
 
 # Load csv file from google drive
 f = drive.CreateFile({'id': os.environ['CSV_ID']})
-f.GetContentFile('output.csv')
+# content = f.GetContentFile('output.csv')
+content = f.GetContentString()
 
 # Write into csv file
-with open('output.csv', mode='a') as csv_file:
-  nick_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+# with open('output.csv', mode='a') as csv_file:
+#   nick_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
   # TODO: if csv file is empty, add field names
   # if csv_file == "":
   # fieldnames = ['date', 'Location', 'Total Capacity', 'Active People', 'Max Temperature', 'Min Temperature', 'Climate']
   # nick_writer.writerow(fieldnames)
-  for i in range(len(whole_list)):
-    location = whole_list[i]['LocationName']
-    totalcapacity = whole_list[i]['TotalCapacity']
-    active = whole_list[i]['LastCount']
-    temp_max = temp['temp_max']
-    temp_min = temp['temp_min']
+for i in range(len(whole_list)):
+  location = whole_list[i]['LocationName']
+  totalcapacity = whole_list[i]['TotalCapacity']
+  active = whole_list[i]['LastCount']
+  temp_max = temp['temp_max']
+  temp_min = temp['temp_min']
     # if location in places:
     #   print('{} : {}/{}'.format(location, active, totalcapacity))
 
     # Save to csv
-    nick_writer.writerow([current_time, location, totalcapacity, active, temp_max, temp_min, climate])
+    # nick_writer.writerow([current_time, location, totalcapacity, active, temp_max, temp_min, climate])
 
-    csv_file.close()
+    # csv_file.close()
+f.SetContentString(content.append([current_time, location, totalcapacity, active, temp_max, temp_min, climate]))
 
 # Update and upload csv file to google drive
 # f = drive.CreateFile({'title': 'output.csv'})
-f.SetContentFile('output.csv')
+# f.SetContentFile('output.csv')
 f.Upload()
 
 # visualize our data
