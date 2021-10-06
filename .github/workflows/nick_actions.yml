@@ -35,11 +35,9 @@ jobs:
           token: ${{ secrets.CREDENTIALS_TOKEN}}
           path: ${{ secrets.SECRET_REPO }}
 
-      - name: Run LS
+      - name: Move repo
         run: |
-          ls
           mv ${{ secrets.SECRET_REPO }}/credentials.json ./
-          ls
 
       - name: Get nick's activity
         env:
@@ -47,5 +45,6 @@ jobs:
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
           WEATHER_API: ${{ secrets.WEATHERAPI}}
           NICK_API: ${{ secrets.NICKAPI }}
+          CSV_ID: ${{ secrets.CSV_ID }}
         run: |
           python get_activity.py

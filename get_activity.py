@@ -59,6 +59,10 @@ for i in range(len(nick_list)-2): # len(nick_list) = 31
 
 # print(whole_list)
 
+# Load csv file from google drive
+f = drive.CreateFile({'id': os.environ['CSV_ID']})
+f.GetContentFile('output.csv')
+
 # Write into csv file
 with open('output.csv', mode='a') as csv_file:
   nick_writer = csv.writer(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
@@ -79,10 +83,10 @@ with open('output.csv', mode='a') as csv_file:
     # Save to csv
     nick_writer.writerow([current_time, location, totalcapacity, active, temp_max, temp_min, climate])
 
-  csv_file.close()
+    csv_file.close()
 
-# Upload csv file to google drive
-f = drive.CreateFile({'title': 'output.csv'})
+# Update and upload csv file to google drive
+# f = drive.CreateFile({'title': 'output.csv'})
 f.SetContentFile('output.csv')
 f.Upload()
 
