@@ -36,6 +36,7 @@ jobs:
           path: ${{ secrets.SECRET_REPO }}
 
       - name: Get nick's activity
+        uses: actions/checkout@v2
         env:
           EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
