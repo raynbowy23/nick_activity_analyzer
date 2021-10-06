@@ -23,6 +23,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Run LS
+        run: |
+          ls
+
       - name: Checkout my private repo
         uses: actions/checkout@v2
         env:
@@ -35,8 +39,11 @@ jobs:
           token: ${{ secrets.CREDENTIALS_TOKEN}}
           path: ${{ secrets.SECRET_REPO }}
 
+      - name: Run LS
+        run: |
+          ls
+
       - name: Get nick's activity
-        uses: actions/checkout@v2
         env:
           EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
           EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
