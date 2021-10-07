@@ -71,6 +71,7 @@ content = f.GetContentString()
   # if csv_file == "":
   # fieldnames = ['date', 'Location', 'Total Capacity', 'Active People', 'Max Temperature', 'Min Temperature', 'Climate']
   # nick_writer.writerow(fieldnames)
+new_row = ''
 for i in range(len(whole_list)):
   location = whole_list[i]['LocationName']
   totalcapacity = whole_list[i]['TotalCapacity']
@@ -84,8 +85,9 @@ for i in range(len(whole_list)):
     # nick_writer.writerow([current_time, location, totalcapacity, active, temp_max, temp_min, climate])
 
     # csv_file.close()
-  new_row = str(current_time) + ',' + str(location) + ',' + str(totalcapacity) + ',' + str(active) + ',' + str(temp_max) + ',' + str(temp_min) + ',' + str(climate)
-  f.SetContentString(content + new_row)
+  new_row += str(current_time) + ',' + str(location) + ',' + str(totalcapacity) + ',' + str(active) + ',' + str(temp_max) + ',' + str(temp_min) + ',' + str(climate)
+
+f.SetContentString(content + new_row)
 print(f.GetContentString())
 
 # Update and upload csv file to google drive
