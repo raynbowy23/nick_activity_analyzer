@@ -70,7 +70,7 @@ def visualize():
     # Rendering
     # fig.show(renderer="svg")
     # fig.show()
-    pio.write_html(fig, file='figure.html', auto_open=True)
+    pio.write_html(fig, file='docs/figure.html', auto_open=True)
 
 
 if __name__ == "__main__":
