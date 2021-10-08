@@ -29,9 +29,10 @@ def get_data():
     drive = GoogleDrive(gauth)
 
     f = drive.CreateFile({'id': os.environ['CSV_ID']})
-    content = f.GetContentString()
-    content_fi = f.GetContentFile('output.csv', mimetype='text/csv')
-    df = pd.read_csv(content_fi)
+    # delete this file at the end of the running
+    f.GetContentFile('output.csv', mimetype='text/csv')
+    indexes = ['date', 'Location', 'Total Capacity', 'Active People', 'Max Temperature', 'Min Temperature', 'Climate']
+    df = pd.read_csv('output.csv', header=0, names=indexes, error_bad_lines=False)
 
     return df
 
@@ -45,6 +46,8 @@ def visualize():
 
     # Set data
     df = get_data()
+    print(df)
+    # df = pd.DataFrame(content, columns=indexes)
 
     # TODO: get locs automatically
     locs = ['Nick Level 1 Fitness', 'Nick Level 2 Fitness', 'Nick Level 3 Fitness', 'Nick Power House', 'Nick Track', 'Nick Pool', 'Nick Courts 1 & 2', 'Nick Courts 3-6', 'Nick Courts 7 & 8', 'Shell Weight Machines', 'Shell Track', 'Shell Cardio Equipment']

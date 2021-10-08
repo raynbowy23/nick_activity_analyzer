@@ -1,7 +1,7 @@
 client_config_backend: settings
 client_config:
-  client_id: ${{ secrets.CLIENT_ID }}
-  client_secret: ${{ secrets.CLIENT_SECRET }}
+  client_id: "512624964012-l049vhkmq4u7v9ukttl4al9cabmsv1r5.apps.googleusercontent.com"
+  client_secret: "OutP4KVTtmP43--j9teXJnAu"
 
 save_credentials: True
 save_credentials_backend: file

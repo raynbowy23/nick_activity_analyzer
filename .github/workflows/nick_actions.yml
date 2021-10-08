@@ -2,7 +2,7 @@ name: nick_actions
 
 on:
   schedule:
-    - cron: '0,30 * * * *'
+    - cron: '0,5 * * * *'
 
 jobs:
 
@@ -54,3 +54,4 @@ jobs:
           CSV_ID: ${{ secrets.CSV_ID }}
         run: |
           python nick_vis.py
+          rm output.csv

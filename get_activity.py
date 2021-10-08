@@ -84,10 +84,7 @@ for i in range(len(whole_list)):
   # nick_writer.writerow([current_time, location, totalcapacity, active, temp_max, temp_min, climate])
 
   # csv_file.close()
-  if i == 0:
-    new_row += str(current_time) + ',' + str(location) + ',' + str(totalcapacity) + ',' + str(active) + ',' + str(temp_max) + ',' + str(temp_min) + ',' + str(climate)
-  elif i != 0:
-    new_row += '\n' + str(current_time) + ',' + str(location) + ',' + str(totalcapacity) + ',' + str(active) + ',' + str(temp_max) + ',' + str(temp_min) + ',' + str(climate)
+  new_row += '\n' + str(current_time) + ',' + str(location) + ',' + str(totalcapacity) + ',' + str(active) + ',' + str(temp_max) + ',' + str(temp_min) + ',' + str(climate)
 
 f.SetContentString(content + new_row)
 # print(f.GetContentString())
