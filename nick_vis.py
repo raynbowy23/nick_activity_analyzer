@@ -1,8 +1,11 @@
+import os
 import pandas as pd
 from plotly.subplots import make_subplots
 import plotly.express as px
 import plotly.graph_objects as go
 import plotly.io as pio
+from pydrive2.drive import GoogleDrive
+from pydrive2.auth import GoogleAuth
 
 import config as cfg
 
@@ -16,11 +19,19 @@ We want to clarify
     - Daily total user
 """
 
-def get_data(file_name):
+def get_data():
     '''
     Get csv data from google drive
     '''
-    df = pd.read_csv(file_name)
+    # Set google drive authentication
+    gauth = GoogleAuth()
+    gauth.LocalWebserverAuth()
+    drive = GoogleDrive(gauth)
+
+    f = drive.CreateFile({'id': os.environ['CSV_ID']})
+    content = f.GetContentString()
+    content_fi = f.GetContentFile('output.csv', mimetype='text/csv')
+    df = pd.read_csv(content_fi)
 
     return df
 
@@ -33,7 +44,7 @@ def visualize():
     # pio.renderers.default = "browser"
 
     # Set data
-    df = get_data(cfg.FILE_NAME)
+    df = get_data()
 
     # TODO: get locs automatically
     locs = ['Nick Level 1 Fitness', 'Nick Level 2 Fitness', 'Nick Level 3 Fitness', 'Nick Power House', 'Nick Track', 'Nick Pool', 'Nick Courts 1 & 2', 'Nick Courts 3-6', 'Nick Courts 7 & 8', 'Shell Weight Machines', 'Shell Track', 'Shell Cardio Equipment']
@@ -55,4 +66,9 @@ def visualize():
 
     # Rendering
     # fig.show(renderer="svg")
-    fig.show()
+    # fig.show()
+    pio.write_html(fig, file='figure.html', auto_open=True)
+
+
+if __name__ == "__main__":
+    visualize()
