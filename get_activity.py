@@ -8,9 +8,8 @@ from datetime import datetime
 import pytz
 import pyowm
 from pydrive2.drive import GoogleDrive
-from pydrive2.auth import GoogleAuth, ServiceAccountCredentials
+from pydrive2.auth import GoogleAuth
 
-from nick_vis import visualize
 import config as cfg
 
 # Settings
@@ -62,7 +61,6 @@ for i in range(len(nick_list)-2): # len(nick_list) = 31
 # Load csv file from google drive
 f = drive.CreateFile({'id': os.environ['CSV_ID']})
 content = f.GetContentString()
-content_fi = f.GetContentFile('output.csv', mimetype='textcsv')
 
 # Write into csv file
 # with open('output.csv', mode='a') as csv_file:
@@ -92,10 +90,8 @@ for i in range(len(whole_list)):
     new_row += '\n' + str(current_time) + ',' + str(location) + ',' + str(totalcapacity) + ',' + str(active) + ',' + str(temp_max) + ',' + str(temp_min) + ',' + str(climate)
 
 f.SetContentString(content + new_row)
-print(f.GetContentString())
+# print(f.GetContentString())
 
-# visualize our data
-visualize(content_fi)
 
 # Update and upload csv file to google drive
 # f = drive.CreateFile({'title': 'output.csv'})
