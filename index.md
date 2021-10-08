@@ -1,7 +1,7 @@
 ## Welcome to Nick Analyzer
 
 ### Tomorrow's Nick Prediction
-This muscle is under building.
+{% include figure.html %}
 
 ### Analyzing for Nick
 This muscle is under building.
