@@ -28,12 +28,12 @@ def get_data(file_name):
 #     fig.write_html(outfile, include_plotlyjs='cdn')
 
 
-def visualize():
+def visualize(fi_name):
     # Rendering settings
     # pio.renderers.default = "browser"
 
     # Set data
-    df = get_data(cfg.FILE_NAME)
+    df = get_data(fi_name)
 
     # TODO: get locs automatically
     locs = ['Nick Level 1 Fitness', 'Nick Level 2 Fitness', 'Nick Level 3 Fitness', 'Nick Power House', 'Nick Track', 'Nick Pool', 'Nick Courts 1 & 2', 'Nick Courts 3-6', 'Nick Courts 7 & 8', 'Shell Weight Machines', 'Shell Track', 'Shell Cardio Equipment']
@@ -55,4 +55,5 @@ def visualize():
 
     # Rendering
     # fig.show(renderer="svg")
-    fig.show()
+    # fig.show()
+    pio.write_html(fig, file='figure.html', auto_open=True)
