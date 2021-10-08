@@ -48,3 +48,9 @@ jobs:
           CSV_ID: ${{ secrets.CSV_ID }}
         run: |
           python get_activity.py
+
+      - name: Deploy to github pages
+        env:
+          CSV_ID: ${{ secrets.CSV_ID }}
+        run: |
+          python nick_vis.py
