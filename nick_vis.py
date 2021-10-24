@@ -57,7 +57,7 @@ def visualize():
     for loc in locs:
         bool_list = df['Location'] == loc
 
-        date, loc, capacity, act_user, weather, max_temp, min_temp = df[bool_list]['date'], df[bool_list]['Location'], df[bool_list]['Total Capacity'], df[bool_list]['Active People'], df[bool_list]['Max Temperature'], df[bool_list]['Min Temperature'], df[bool_list]['Climate']
+        date, loc, capacity, act_user, max_temp, min_temp, weather = df[bool_list]['date'], df[bool_list]['Location'], df[bool_list]['Total Capacity'], df[bool_list]['Active People'], df[bool_list]['Max Temperature'], df[bool_list]['Min Temperature'], df[bool_list]['Climate']
 
         # Calculate average active user?
 
@@ -65,7 +65,7 @@ def visualize():
         # fig.add_trace(go.Scatter(x=date, y=capacity, fillcolor='red', name='Capacity'))
         fig.add_trace(go.Scatter(x=date, y=act_user, name='{} - Active Muscles'.format(loc)))
 
-        fig.update_layout(height=200, width=300, title_text='Location - Active Muscles')
+        fig.update_layout(autosize=False, height=400, width=400, title_text='Location - Active Muscles')
 
     # Rendering
     # fig.show(renderer="svg")
