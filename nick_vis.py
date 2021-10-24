@@ -65,7 +65,7 @@ def visualize():
         # fig.add_trace(go.Scatter(x=date, y=capacity, fillcolor='red', name='Capacity'))
         fig.add_trace(go.Scatter(x=date, y=act_user, name='{} - Active Muscles'.format(loc)))
 
-        fig.update_layout(autosize=False, height=400, width=400, title_text='Location - Active Muscles')
+        fig.update_layout(autosize=False, height=400, width=400, title_text='{} - Active Muscles'.format(loc))
 
     # Rendering
     # fig.show(renderer="svg")
