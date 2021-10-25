@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import numpy as np
 from plotly.subplots import make_subplots
 import plotly.express as px
 import plotly.graph_objects as go
@@ -51,27 +52,64 @@ def visualize():
 
     # TODO: get locs automatically
     locs = ['Nick Level 1 Fitness', 'Nick Level 2 Fitness', 'Nick Level 3 Fitness', 'Nick Power House', 'Nick Track', 'Nick Pool', 'Nick Courts 1 & 2', 'Nick Courts 3-6', 'Nick Courts 7 & 8', 'Shell Weight Machines', 'Shell Track', 'Shell Cardio Equipment']
-    fig = make_subplots(rows=4, cols=3, subplot_titles=(locs))
+    fig = go.Figure()
+    colorscales = ['aggrnyl', 'agsunset', 'blackbody', 'bluered', 'blues', 'blugrn', 'bluyl', 'brwnyl', 'bugn', 'bupu', 'burg', 'burgyl', 'cividis', 'darkmint', 'electric', 'emrld', 'gnbu', 'greens', 'greys', 'hot', 'inferno', 'jet', 'magenta', 'magma', 'mint', 'orrd', 'oranges', 'oryel', 'peach', 'pinkyl', 'plasma', 'plotly3', 'pubu', 'pubugn', 'purd', 'purp', 'purples', 'purpor', 'rainbow', 'rdbu', 'rdpu', 'redor', 'reds', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd', 'algae', 'amp', 'deep', 'dense', 'gray', 'haline', 'ice', 'matter', 'solar', 'speed', 'tempo', 'thermal', 'turbid', 'armyrose', 'brbg', 'earth', 'fall', 'geyser', 'prgn', 'piyg', 'picnic', 'portland', 'puor', 'rdgy', 'rdylbu', 'rdylgn', 'spectral', 'tealrose', 'temps', 'tropic', 'balance', 'curl', 'delta', 'edge', 'hsv', 'icefire', 'phase', 'twilight', 'mrybm', 'mygbm']
+    random_color_num = np.random.randint(len(colorscales))
 
+    j = 0
+    buttons = []
     # Lined up along each locations
-    for loc in locs:
+    for i, _loc in enumerate(locs):
         bool_list = df['Location'] == loc
 
         date, loc, capacity, act_user, max_temp, min_temp, weather = df[bool_list]['date'], df[bool_list]['Location'], df[bool_list]['Total Capacity'], df[bool_list]['Active People'], df[bool_list]['Max Temperature'], df[bool_list]['Min Temperature'], df[bool_list]['Climate']
 
-        # Calculate average active user?
+        # TODO: Calculate average active user and show below the figure
 
         # Create figures
-        # fig.add_trace(go.Scatter(x=date, y=capacity, fillcolor='red', name='Capacity'))
-        fig.add_trace(go.Scatter(x=date, y=act_user, name='{} - Active Muscles'.format(loc)))
+        if i == 0:
+            fig.add_trace(
+                go.Scatter(
+                    name='Active Muscles',
+                    x=date,
+                    y=act_user,
+                    text=act_user,
+                    hoverinfo='text',
+                    mode='lines+markers',
+                    marker={'color': act_user, 'colorscale': colorscales[random_color_num], 'showscale': True, 'colorbar': {'len': 0.8}}
+                )
+            )
+            fig.add_trace(go.Scatter(x=date, y=capacity, name='Capacity'))
+        buttons.append(dict(
+            method='restyle',
+            label=str(_loc),
+            visible=True,
+            args=[{'y':[act_user, capacity],
+                    'x':[date],
+                    'type': 'scatter'}],
+            )
+        )
+        
+        j += 1
 
-        fig.update_layout(autosize=False, height=400, width=400, title_text='{} - Active Muscles'.format(loc))
+    # Dropdown menus settings
+    updatemenu = []
+    custom_menu = dict()
+    updatemenu.append(custom_menu)
+    updatemenu[0]['buttons'] = buttons
+    updatemenu[0]['direction'] = 'down'
+    updatemenu[0]['showactive'] = True
+
+    fig.update_layout(
+        height=1000,
+        width=1000,
+        xaxis_rangeslider_visible=False,
+        xaxis_rangeslider_thickness=0.1,
+        updatemenus=updatemenu,
+    )
 
     # Rendering
-    # fig.show(renderer="svg")
-    # fig.show()
     pio.write_html(fig, file='docs/figure.html', auto_open=True)
-
 
 if __name__ == "__main__":
     visualize()
