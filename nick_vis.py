@@ -60,7 +60,7 @@ def visualize():
     buttons = []
     # Lined up along each locations
     for i, _loc in enumerate(locs):
-        bool_list = df['Location'] == loc
+        bool_list = df['Location'] == _loc
 
         date, loc, capacity, act_user, max_temp, min_temp, weather = df[bool_list]['date'], df[bool_list]['Location'], df[bool_list]['Total Capacity'], df[bool_list]['Active People'], df[bool_list]['Max Temperature'], df[bool_list]['Min Temperature'], df[bool_list]['Climate']
 
