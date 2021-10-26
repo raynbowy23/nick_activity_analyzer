@@ -118,7 +118,8 @@ def visualize():
     f_file.GetContentFile('figure.html', mimetype='text/html')
 
     # Rendering
-    pio.write_html(fig, file=f_file, auto_open=True)
+    pio.write_html(fig, file='figure.html', auto_open=True)
+    f_file.SetContentFile('figure.html')
     f_file.Upload()
 
 if __name__ == "__main__":
