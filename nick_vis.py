@@ -109,7 +109,8 @@ def visualize():
     )
 
     # Rendering
-    pio.write_html(fig, file='docs/figure.html', full_html=False, auto_open=True)
+    # pio.write_html(fig, file='docs/figure.html', full_html=False, auto_open=True)
+    fig.write_image('images/fig.svg')
 
 if __name__ == "__main__":
     visualize()
