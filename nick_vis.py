@@ -20,15 +20,18 @@ We want to clarify
     - Daily total user
 """
 
-def get_data():
-    '''
-    Get csv data from google drive
-    '''
+def prepare_drive_authentication():
+
     # Set google drive authentication
     gauth = GoogleAuth()
     gauth.LocalWebserverAuth()
     drive = GoogleDrive(gauth)
+    return drive
 
+def get_data(drive):
+    '''
+    Get csv data from google drive
+    '''
     f = drive.CreateFile({'id': os.environ['CSV_ID']})
     # delete this file at the end of the running
     f.GetContentFile('output.csv', mimetype='text/csv')
@@ -45,8 +48,9 @@ def visualize():
     # Rendering settings
     # pio.renderers.default = "browser"
 
+    drive = prepare_drive_authentication()
     # Set data
-    df = get_data()
+    df = get_data(drive)
     print(df)
     # df = pd.DataFrame(content, columns=indexes)
 
@@ -108,9 +112,14 @@ def visualize():
         updatemenus=updatemenu,
     )
 
+    # Access to html file
+    f_file = drive.CreateFile({'id': os.environ['FIGURE_HTML']})
+    # delete this file at the end of the running
+    f_file.GetContentFile('figure.html', mimetype='text/html')
+
     # Rendering
-    pio.write_html(fig, file='docs/figure.html', auto_open=True)
-    # fig.write_image('./docs/images/fig.svg')
+    pio.write_html(fig, file=f_file, auto_open=True)
+    f_file.Upload()
 
 if __name__ == "__main__":
     visualize()

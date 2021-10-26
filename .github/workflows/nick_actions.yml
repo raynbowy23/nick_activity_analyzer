@@ -50,9 +50,10 @@ jobs:
           python get_activity.py
 
       - name: Deploy github pages
-        uses: actions/checkout@v2
         env:
           CSV_ID: ${{ secrets.CSV_ID }}
+          FIGURE_HTML: ${{ secrets.FIGURE_HTML }}
         run: |
           python nick_vis.py
           rm output.csv
+          rm figure.html
