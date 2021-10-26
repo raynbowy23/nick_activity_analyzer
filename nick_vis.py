@@ -109,7 +109,7 @@ def visualize():
     )
 
     # Rendering
-    pio.write_html(fig, file='docs/figure.html', auto_open=True)
+    pio.write_html(fig, file='docs/figure.html', full_html=False, auto_open=True)
 
 if __name__ == "__main__":
     visualize()
