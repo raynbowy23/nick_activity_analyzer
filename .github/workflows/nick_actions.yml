@@ -49,7 +49,7 @@ jobs:
         run: |
           python get_activity.py
 
-      - name: Deploy to github pages
+      - name: Deploy github pages
         env:
           CSV_ID: ${{ secrets.CSV_ID }}
         run: |
