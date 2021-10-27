@@ -53,7 +53,8 @@ jobs:
         env:
           CSV_ID: ${{ secrets.CSV_ID }}
           FIGURE_HTML: ${{ secrets.FIGURE_HTML }}
+          FIG_SVG: ${{ secrets.FIG_SVG }}
         run: |
           python nick_vis.py
           rm output.csv
-          rm figure.html
+          rm fig.svg

@@ -112,15 +112,16 @@ def visualize():
         updatemenus=updatemenu,
     )
 
-    # Access to html file
-    # f_file = drive.CreateFile({'id': os.environ['FIGURE_HTML']})
-    # f_file.GetContentFile('figure.html', mimetype='text/html')
+    # Access to svg file
+    f_file = drive.CreateFile({'id': os.environ['FIG_SVG']})
+    f_file.GetContentFile('fig.svg')
 
     # Rendering
-    pio.write_html(fig, file='./docs/figure.html')
-    print(os.listdir(os.path.join(os.getcwd(), 'docs')))
-    # f_file.SetContentFile('./docs/figure.html')
-    # f_file.Upload()
+    # pio.write_html(fig, file='./docs/figure.html')
+    pio.write_image(fig, file='fig.svg', format='svg', engine='kaleido')
+    # print(os.listdir(os.path.join(os.getcwd(), 'docs/images')))
+    f_file.SetContentFile('fig.svg')
+    f_file.Upload()
 
 if __name__ == "__main__":
     visualize()
