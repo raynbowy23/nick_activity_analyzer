@@ -117,7 +117,7 @@ def visualize():
 
     # Rendering
     pio.write_html(fig, file='./docs/figure.html')
-    print(os.listdir(os.getcwd()))
+    print(os.listdir(os.path.join(os.getcwd(), '/docs')))
     f_file.SetContentFile('./docs/figure.html')
     f_file.Upload()
 
