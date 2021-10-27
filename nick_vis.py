@@ -114,6 +114,7 @@ def visualize():
 
     # Access to html file
     f_file = drive.CreateFile({'id': os.environ['FIGURE_HTML']})
+    f_file.GetContentFile('figure.html', mimetype='text/html')
 
     # Rendering
     pio.write_html(fig, file='./docs/figure.html')
