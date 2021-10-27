@@ -113,14 +113,14 @@ def visualize():
     )
 
     # Access to html file
-    f_file = drive.CreateFile({'id': os.environ['FIGURE_HTML']})
+    # f_file = drive.CreateFile({'id': os.environ['FIGURE_HTML']})
     # f_file.GetContentFile('figure.html', mimetype='text/html')
 
     # Rendering
     pio.write_html(fig, file='./docs/figure.html')
     print(os.listdir(os.path.join(os.getcwd(), 'docs')))
-    f_file.SetContentFile('./docs/figure.html')
-    f_file.Upload()
+    # f_file.SetContentFile('./docs/figure.html')
+    # f_file.Upload()
 
 if __name__ == "__main__":
     visualize()
