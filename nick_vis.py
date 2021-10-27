@@ -116,8 +116,8 @@ def visualize():
     f_file = drive.CreateFile({'id': os.environ['FIGURE_HTML']})
 
     # Rendering
-    f_html = pio.write_html(fig, file='figure.html', auto_open=True)
-    f_file.SetContentFile(f_html)
+    f_html = pio.write_html(fig, file='figure.html')
+    f_file.SetContentString(f_html)
     f_file.Upload()
 
 if __name__ == "__main__":
