@@ -27,7 +27,16 @@ climate = Data.detailed_status
 
 # Set google drive authentication
 gauth = GoogleAuth()
-gauth.LocalWebserverAuth()
+gauth.LoadCredentialsFile("credentials.json")
+if gauth.credentials is None:
+    # Authenticate if they're not there
+    gauth.LocalWebserverAuth()
+elif gauth.access_token_expired:
+    # Refresh them if expired
+    gauth.Refresh()
+else:
+    # Initialize the saved creds
+    gauth.Authorize()
 drive = GoogleDrive(gauth)
 
 # nick's API
