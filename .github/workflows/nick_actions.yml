@@ -57,4 +57,3 @@ jobs:
         run: |
           python nick_vis.py
           rm output.csv
-          rm fig.svg
